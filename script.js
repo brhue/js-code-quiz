@@ -28,7 +28,7 @@ let questions = [
     correctAnswer: 3,
   }
 ];
-
+let questionIndex = 0;
 let timeRemaining = 75;
 let interval;
 
@@ -38,7 +38,7 @@ function startQuiz() {
   interval = setInterval(() => {
     timeRemaining--;
   }, 1000);
-  renderQuestion(questions[0]);
+  renderQuestion(questions[questionIndex]);
 }
 
 function renderQuestion(question) {
@@ -52,6 +52,7 @@ function renderQuestion(question) {
 
   for (let i = 0; i < question.answers.length; i++) {
     let btn = document.createElement('button');
+    btn.setAttribute('class', 'answer');
     btn.textContent = `${i + 1}. ${question.answers[i]}`;
     if (i === question.correctAnswer) {
       btn.setAttribute('data-answer', 'true');
@@ -61,4 +62,19 @@ function renderQuestion(question) {
   quizArea.appendChild(questionEl);
 }
 
+function handleClick(event) {
+  let target = event.target;
+
+  if (target.matches('button.answer')) {
+    questionIndex++;
+    if (questionIndex < questions.length) {
+      renderQuestion(questions[questionIndex]);
+    } else {
+      // Last question show end quiz screen.
+      console.log('quiz end');
+    }
+  }
+}
+
 startBtn.addEventListener('click', startQuiz);
+quizArea.addEventListener('click', handleClick);
