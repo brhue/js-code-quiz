@@ -33,6 +33,7 @@ let questions = [
 let questionIndex = 0;
 let timeRemaining = 60;
 let interval;
+let highscores = [];
 
 function startQuiz() {
   // Start a timer and show the first question.
@@ -69,6 +70,16 @@ function endQuiz() {
 
   btn.addEventListener('click', function() {
     // Save the users initials and high score to localstorage
+    let initials = input.value;
+    if (initials) {
+      let score = {
+        initials: initials,
+        score: timeRemaining
+      };
+      highscores.push(score);
+      localStorage.setItem('highscores', JSON.stringify(highscores));
+      // redirect to highscores page
+    }
   });
 
   endScreen.append(label, input, btn);
