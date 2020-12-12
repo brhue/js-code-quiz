@@ -1,5 +1,6 @@
 let startBtn = document.querySelector('#start-btn');
 let quizArea = document.querySelector('#quiz-area');
+let feedbackEl = document.querySelector('#quiz-feedback');
 // Correct answer is based off array index.
 let questions = [
   {
@@ -66,6 +67,11 @@ function handleClick(event) {
   let target = event.target;
 
   if (target.matches('button.answer')) {
+    if (target.getAttribute('data-answer')) {
+      feedbackEl.textContent = 'Correct!';
+    } else {
+      feedbackEl.textContent = 'Wrong!';
+    }
     questionIndex++;
     if (questionIndex < questions.length) {
       renderQuestion(questions[questionIndex]);
