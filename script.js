@@ -33,7 +33,13 @@ let questions = [
 let questionIndex = 0;
 let timeRemaining = 60;
 let interval;
-let highscores = [];
+let highscores = localStorage.getItem('highscores');
+
+if (highscores) {
+  highscores = JSON.parse(highscores);
+} else {
+  highscores = [];
+}
 
 function startQuiz() {
   // Start a timer and show the first question.
