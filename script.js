@@ -1,6 +1,7 @@
 let startBtn = document.querySelector('#start-btn');
 let quizArea = document.querySelector('#quiz-area');
 let feedbackEl = document.querySelector('#quiz-feedback');
+let timeSpan = document.querySelector('#time');
 // Correct answer is based off array index.
 let questions = [
   {
@@ -30,7 +31,7 @@ let questions = [
   }
 ];
 let questionIndex = 0;
-let timeRemaining = 75;
+let timeRemaining = 60;
 let interval;
 
 function startQuiz() {
@@ -38,6 +39,7 @@ function startQuiz() {
   console.log('start quiz');
   interval = setInterval(() => {
     timeRemaining--;
+    timeSpan.textContent = timeRemaining;
   }, 1000);
   renderQuestion(questions[questionIndex]);
 }
@@ -71,6 +73,8 @@ function handleClick(event) {
       feedbackEl.textContent = 'Correct!';
     } else {
       feedbackEl.textContent = 'Wrong!';
+      timeRemaining -= 10;
+      timeSpan.textContent = timeRemaining;
     }
     questionIndex++;
     if (questionIndex < questions.length) {
