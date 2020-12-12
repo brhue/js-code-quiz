@@ -44,6 +44,37 @@ function startQuiz() {
   renderQuestion(questions[questionIndex]);
 }
 
+function endQuiz() {
+  clearInterval(interval);
+  quizArea.innerHTML = '';
+
+  let endScreen = document.createElement('div');
+  let h1 = document.createElement('h1');
+  h1.textContent = 'All done!';
+
+  let p = document.createElement('p');
+  p.textContent = `Your final score is ${timeRemaining}`;
+  endScreen.appendChild(h1);
+  endScreen.appendChild(p);
+
+  let label = document.createElement('label');
+  label.setAttribute('for', 'initials-input');
+  label.textContent = 'Enter initials: ';
+  let input = document.createElement('input');
+  input.setAttribute('type', 'text');
+  input.setAttribute('id', 'initials-input');
+  input.setAttribute('placeholder', 'Initials go here');
+  let btn = document.createElement('button');
+  btn.textContent = 'Submit';
+
+  btn.addEventListener('click', function() {
+    // Save the users initials and high score to localstorage
+  });
+
+  endScreen.append(label, input, btn);
+  quizArea.appendChild(endScreen);
+}
+
 function renderQuestion(question) {
   quizArea.innerHTML = '';
   let questionEl = document.createElement('div');
@@ -81,7 +112,7 @@ function handleClick(event) {
       renderQuestion(questions[questionIndex]);
     } else {
       // Last question show end quiz screen.
-      console.log('quiz end');
+      endQuiz();
     }
   }
 }
