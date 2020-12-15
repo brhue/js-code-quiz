@@ -2,6 +2,11 @@ let startBtn = document.querySelector('#start-btn');
 let quizArea = document.querySelector('#quiz-area');
 let feedbackEl = document.querySelector('#quiz-feedback');
 let timeSpan = document.querySelector('#time');
+let highscoresEl = document.querySelector('#highscores-area');
+let scoresListEl = document.querySelector('#scores');
+let viewScoresEl = document.querySelector('#view-scores');
+let clearScoresBtn = document.querySelector('#clear-btn');
+let backBtn = document.querySelector('#back-btn');
 // Correct answer is based off array index.
 let questions = [
   {
@@ -85,6 +90,7 @@ function endQuiz() {
       highscores.push(score);
       localStorage.setItem('highscores', JSON.stringify(highscores));
       // redirect to highscores page
+      showHighScores();
     }
   });
 
@@ -134,5 +140,28 @@ function handleClick(event) {
   }
 }
 
+function showHighScores() {
+  quizArea.setAttribute('style', 'display: none;');
+  highscoresEl.setAttribute('style', 'display: block;');
+  highscores
+    .sort((a, b) => b.score - a.score)
+    .forEach((score, i) => {
+      let li = document.createElement('li');
+      li.textContent = `${i + 1}. ${score.initials} ${score.score}`;
+      scoresListEl.appendChild(li);
+    });
+}
+
 startBtn.addEventListener('click', startQuiz);
 quizArea.addEventListener('click', handleClick);
+viewScoresEl.addEventListener('click', showHighScores);
+clearScoresBtn.addEventListener('click', function () {
+  highscores = [];
+  localStorage.removeItem('highscores');
+  scoresListEl.innerHTML = '';
+});
+
+backBtn.addEventListener('click', function () {
+  highscoresEl.setAttribute('style', 'display: none;');
+  quizArea.setAttribute('style', 'display: block;');
+});
