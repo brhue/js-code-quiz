@@ -82,8 +82,9 @@ function endQuiz() {
   let btn = document.createElement('button');
   btn.textContent = 'Submit';
 
-  btn.addEventListener('click', function() {
+  btn.addEventListener('click', function(e) {
     // Save the users initials and high score to localstorage
+    e.preventDefault();
     let initials = input.value;
     if (initials) {
       let score = {
@@ -96,8 +97,9 @@ function endQuiz() {
       showHighScores();
     }
   });
-
-  endScreen.append(label, input, btn);
+  let form = document.createElement('form');
+  form.append(label, input, btn);
+  endScreen.append(form);
   quizArea.appendChild(endScreen);
 }
 
