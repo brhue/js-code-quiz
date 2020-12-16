@@ -1,5 +1,6 @@
 let startBtn = document.querySelector('#start-btn');
 let quizArea = document.querySelector('#quiz-area');
+let startScreenEl = document.querySelector('#start-screen');
 let feedbackEl = document.querySelector('#quiz-feedback');
 let timeSpan = document.querySelector('#time');
 let highscoresEl = document.querySelector('#highscores-area');
@@ -36,7 +37,7 @@ let questions = [
   }
 ];
 let questionIndex = 0;
-let timeRemaining = 60;
+let timeRemaining = 75;
 let interval;
 let highscores = localStorage.getItem('highscores');
 
@@ -53,6 +54,8 @@ function startQuiz() {
     timeRemaining--;
     timeSpan.textContent = timeRemaining;
   }, 1000);
+  startScreenEl.setAttribute('style', 'display: none;');
+  quizArea.setAttribute('style', 'display: block;');
   renderQuestion(questions[questionIndex]);
 }
 
@@ -141,8 +144,11 @@ function handleClick(event) {
 }
 
 function showHighScores() {
+  document.querySelector('header').setAttribute('style', 'display: none;');
   quizArea.setAttribute('style', 'display: none;');
+  startScreenEl.setAttribute('style', 'display: none;');
   highscoresEl.setAttribute('style', 'display: block;');
+  scoresListEl.innerHTML = '';
   highscores
     .sort((a, b) => b.score - a.score)
     .forEach((score, i) => {
@@ -162,6 +168,10 @@ clearScoresBtn.addEventListener('click', function () {
 });
 
 backBtn.addEventListener('click', function () {
+  document.querySelector('header').setAttribute('style', 'display: inital;');
   highscoresEl.setAttribute('style', 'display: none;');
-  quizArea.setAttribute('style', 'display: block;');
+  quizArea.setAttribute('style', 'display: none;');
+  startScreenEl.setAttribute('style', 'display: block;');
+  questionIndex = 0;
+  timeRemaining = 75;
 });
