@@ -1,5 +1,5 @@
 # js-code-quiz
-
+![A gif demonstrating the quiz app.](./assets/screenshots/screen.gif)
 ## Description
 This is a basic code quiz about javascript and written in javascript using various DOM manipulation techniques. Features a persistent highscore list using the `localStorage` web api.
 Take the quiz for yourself on the [live](https://brhue.github.io/js-code-quiz/) version.
