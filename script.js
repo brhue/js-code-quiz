@@ -65,9 +65,11 @@ function endQuiz() {
 
   let endScreen = document.createElement('div');
   let h1 = document.createElement('h1');
+  h1.setAttribute('class', 'mb-1');
   h1.textContent = 'All done!';
 
   let p = document.createElement('p');
+  p.setAttribute('class', 'mb-1');
   p.textContent = `Your final score is ${timeRemaining}`;
   endScreen.appendChild(h1);
   endScreen.appendChild(p);
@@ -79,7 +81,9 @@ function endQuiz() {
   input.setAttribute('type', 'text');
   input.setAttribute('id', 'initials-input');
   input.setAttribute('placeholder', 'Initials go here');
+  input.setAttribute('style', 'padding: 0.5rem 1rem; font-size: 1rem;');
   let btn = document.createElement('button');
+  btn.setAttribute('class', 'btn');
   btn.textContent = 'Submit';
 
   btn.addEventListener('click', function(e) {
@@ -109,12 +113,13 @@ function renderQuestion(question) {
   questionEl.setAttribute('class', 'question-card')
 
   let questionHeader = document.createElement('h1');
+  questionHeader.setAttribute('class', 'mb-1');
   questionHeader.textContent = question.questionText;
   questionEl.appendChild(questionHeader);
 
   for (let i = 0; i < question.answers.length; i++) {
     let btn = document.createElement('button');
-    btn.setAttribute('class', 'answer');
+    btn.setAttribute('class', 'btn answer');
     btn.textContent = `${i + 1}. ${question.answers[i]}`;
     if (i === question.correctAnswer) {
       btn.setAttribute('data-answer', 'true');
