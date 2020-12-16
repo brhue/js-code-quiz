@@ -59,6 +59,18 @@ footer {
   color: white;
 }
 
+.message {
+  animation: fade 1s forwards;
+}
+
+.correct {
+  color: green;
+}
+
+.wrong {
+  color: red;
+}
+
 #highscores-area {
   display: none;
 }
@@ -70,5 +82,11 @@ footer {
 @media screen and (min-width: 768px) {
   .answer {
     width: initial;
+  }
+}
+
+@keyframes fade {
+  100% {
+    opacity: 0;
   }
 }

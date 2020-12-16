@@ -128,8 +128,10 @@ function handleClick(event) {
   if (target.matches('button.answer')) {
     if (target.getAttribute('data-answer')) {
       feedbackEl.textContent = 'Correct!';
+      feedbackEl.setAttribute('class', 'correct message');
     } else {
       feedbackEl.textContent = 'Wrong!';
+      feedbackEl.setAttribute('class', 'wrong message');
       timeRemaining -= 10;
       timeSpan.textContent = timeRemaining;
     }
@@ -174,4 +176,9 @@ backBtn.addEventListener('click', function () {
   startScreenEl.setAttribute('style', 'display: block;');
   questionIndex = 0;
   timeRemaining = 75;
+});
+
+feedbackEl.addEventListener('animationend', function () {
+  this.setAttribute('class', '');
+  this.textContent = '';
 });
