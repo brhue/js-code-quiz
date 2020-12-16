@@ -53,6 +53,9 @@ function startQuiz() {
   interval = setInterval(() => {
     timeRemaining--;
     timeSpan.textContent = timeRemaining;
+    if (timeRemaining <= 0) {
+      endQuiz();
+    }
   }, 1000);
   startScreenEl.setAttribute('style', 'display: none;');
   quizArea.setAttribute('style', 'display: block;');
